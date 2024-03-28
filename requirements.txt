@@ -1,6 +1,13 @@
+uvicorn
 fastapi
 typing
 pydantic
 requests
+<<<<<<< HEAD
 uvicorn
 boto3
+=======
+pymongo
+dnspython
+mysqlclient
+>>>>>>> refs/remotes/origin/main
