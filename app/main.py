@@ -3,31 +3,20 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
-<<<<<<< HEAD
 import json
 import requests
-# import boto3
-=======
-# from models import Item
-import json
-import requests
-
 import os
 import MySQLdb
 from fastapi.staticfiles import StaticFiles
->>>>>>> refs/remotes/origin/main
 
 app = FastAPI()
-
 app.mount("/static", StaticFiles(directory="static", html = True), name="static")
 
+# db config stuff
 DBHOST = os.environ.get('DBHOST')
 DBUSER = os.environ.get('DBUSER')
 DBPASS = os.environ.get('DBPASS')
 DB = "nem2p"
-
-# The URL for this API has a /docs endpoint that lets you see and test
-# your various endpoints/methods.
 
 @app.get("/")  # zone apex
 def zone_apex():
@@ -42,66 +31,6 @@ def get_all_albums():
     db.close()
     return results
 
-<<<<<<< HEAD
-@app.get("/github/repos/{user}")
-def github_user_repos(user):
-    url = "https://api.github.com/users/" + user + "/repos"
-    response = requests.get(url)
-    body = json.loads(response.text)
-    return {"repos": body}
-
-
-
-# Endpoints and Methods
-# /blah - endpoint
-# GET/POST/DELETE/PATCH - methods
-# 
-# Simple GET method demo
-# Adds two integers as PATH parameters
-@app.get("/add/{number_1}/{number_2}")
-def add_me(number_1: int, number_2: int):
-    sum = number_1 + number_2
-    return {"sum": sum}
-
-# Let's develop a new one:
-@app.get("/divide/{num_1}/{num_2}/{num_3}")
-def divide_me(num_1: int,num_2: int):
-    div = num_2 / num_1
-    return {"quotient": div}
-
-## Parameters
-# Introduce parameter data types and defaults from the Optional library
-@app.get("/items/{item_id}")
-def read_items(item_id: int, q: str = None, s: str = None):
-    # to-do: could be used to read from/write to database, use item_id as query parameter
-    # and fetch results. The q and s URL parameters are optional.
-    # - database
-    # - flat text
-    # - another api (internal)
-    # - another api (external)
-    return {"item_id": item_id, "q": q, "s": s}
-
-
-## Data Modeling
-# Model data you are expecting.
-# Set defaults, data types, etc.
-#
-# Imagine the JSON below as a payload via POST method
-# The endpoint can then parse the data by field (name, description, price, tax)
-# {
-#     "name":"Trek Domaine 5000",
-#     "description": "Racing frame",
-#     "price": 7200,
-#     "tax": 381
-# }
-
-class Item(BaseModel):
-    name: str
-    description: Optional[str] = None
-    price: float
-    tax: Optional[float] = None
-
-=======
 @app.get("/albums/{id}")
 def get_one_album(id):
     db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
@@ -111,17 +40,3 @@ def get_one_album(id):
     db.close()
     return results
     
->>>>>>> refs/remotes/origin/main
-# Start using the "Item" BaseModel
-# Post / Delete / Patch methods
-# @app.post("/items/{item_id}")
-# def add_item(item_id: int, item: Item):
-#     return {"item_id": item_id, "item_name": item.name}
-
-# @app.delete("/items/{item_id}")
-# def delete_item(item_id: int, item: Item):
-#     return {"action": "deleted", "item_id": item_id}
-
-# @app.patch("/items/{item_id}")
-# def patch_item(item_id: int, item: Item):
-#     return {"action": "patch", "item_id": item_id}

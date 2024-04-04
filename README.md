@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-### Gitpod zzz
+### Gitpod
 
 The easiest way to start working is to append `https://gitpod.io/#` before the URL of your GitHub repository. This should look something like (but use the URL of your fork):
 
@@ -12,7 +12,7 @@ From within Gitpod, you have a full IDE to work with the code. You can run comma
 
 ### Local
 
-After forking this repository for your own work, you may need to set up an isolated environment in Python. I would suggest using `pipenv` for this:
+After forking this repository for your own work, you may need to set up an isolated environment in Python. I suggest using `pipenv` for this:
 
 ```
 # Install pipenv itself
