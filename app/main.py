@@ -39,4 +39,3 @@ def get_one_album(id):
     results = c.fetchall()
     db.close()
     return results
-    
